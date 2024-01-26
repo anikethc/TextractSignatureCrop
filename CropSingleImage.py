@@ -2,10 +2,8 @@ from PIL import Image
 from io import BytesIO
 from utils import save_and_upload_image
 from utils import get_bounding_box
-import boto3
 
-s3 = boto3.client('s3')
-def CropSingleImage(res, target_s3_bucket, target_s3_key, file_stream):
+def CropSingleImage(res, s3, target_s3_bucket, target_s3_key, file_stream):
     original_image = Image.open(file_stream)
     for i, item in enumerate(res["Blocks"]):
         if item["BlockType"] == "SIGNATURE":
