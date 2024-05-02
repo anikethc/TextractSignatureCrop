@@ -10,4 +10,5 @@ def CropSingleImage(res, s3, target_s3_bucket, target_s3_key, file_stream):
             left, top, width, height = get_bounding_box(item['Geometry']['BoundingBox'], original_image)
             left, top, right, bottom = map(int, (left, top, left + width, top + height))
             signature_image = original_image.crop((left, top, right, bottom))
-            save_and_upload_image(s3, signature_image, target_s3_bucket, target_s3_key)
+            key = f'{target_s3_key}_item_{i}.png'
+            save_and_upload_image(s3, signature_image, target_s3_bucket, key)
